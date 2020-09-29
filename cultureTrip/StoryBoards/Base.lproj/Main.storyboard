@@ -36,10 +36,10 @@
             </objects>
             <point key="canvasLocation" x="1047.8260869565217" y="137.94642857142856"/>
         </scene>
-        <!--View Controller-->
+        <!--Articles View Controller-->
         <scene sceneID="1Gm-Ah-msk">
             <objects>
-                <viewController id="Iux-Cb-Bie" sceneMemberID="viewController">
+                <viewController id="Iux-Cb-Bie" customClass="ArticlesViewController" customModule="cultureTrip" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Igq-Rc-O3K">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -47,6 +47,10 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Wo3-uS-vfv">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Iux-Cb-Bie" id="Cdi-QJ-pqa"/>
+                                    <outlet property="delegate" destination="Iux-Cb-Bie" id="USl-1p-nUl"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -59,6 +63,9 @@
                         <viewLayoutGuide key="safeArea" id="vQS-pL-x3U"/>
                     </view>
                     <navigationItem key="navigationItem" id="lxo-z2-pNu"/>
+                    <connections>
+                        <outlet property="tableView" destination="Wo3-uS-vfv" id="WM8-AV-azf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hor-Pc-Iy2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

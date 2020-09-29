@@ -18,15 +18,18 @@ class ArticleTableViewCell: UITableViewCell {
     @IBOutlet weak var updateTimeLabel: UILabel!
     @IBOutlet weak var avatarImageLabel: UIImageView!
     
+    static let identifier: String = "ArticleTableViewCell"
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        setAppearence()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
-    
+
+    func setAppearence() {
+        backgroundColor = .white
+    }
 }
