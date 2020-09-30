@@ -9,6 +9,8 @@
 import UIKit
 
 class ArticleTableViewCell: UITableViewCell {
+    static let identifier: String = "ArticleTableViewCell"
+
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var articleImage: UIImageView!
@@ -17,9 +19,14 @@ class ArticleTableViewCell: UITableViewCell {
     @IBOutlet weak var autorNameLabel: UILabel!
     @IBOutlet weak var updateTimeLabel: UILabel!
     @IBOutlet weak var avatarImage: UIImageView!
-    
-    static let identifier: String = "ArticleTableViewCell"
-
+    @IBOutlet private weak var likesCountLable: UILabel!
+    var likesCount: Int = 0 {
+        didSet {
+            if likesCount > 0 {
+                likesCountLable.text = "\(String(describing: likesCount))"
+            }
+        }
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         setAppearence()
@@ -30,6 +37,31 @@ class ArticleTableViewCell: UITableViewCell {
     }
 
     func setAppearence() {
+        likeButton.setImage(UIImage(assetIdentifier: .like), for: .normal)
+        likeButton.setImage(UIImage(assetIdentifier: .liked), for: .selected)
+        
+        saveButton.setImage(UIImage(assetIdentifier: .save), for: .normal)
+        saveButton.setImage(UIImage(assetIdentifier: .saved), for: .selected)
+        
         backgroundColor = .white
+        avatarImage.layer.cornerRadius = avatarImage.frame.size.width / 2
+        avatarImage.clipsToBounds = true
+        
+        titleLabel.font = .titleFont
+        autorNameLabel.font = .subTextFont
+        categoryLabel.font = .categoryFont
+        
+        titleLabel.textColor = .titleColor
+        autorNameLabel.textColor = .subTextColor
+        categoryLabel.textColor = .categoryColor
+    }
+    
+    @IBAction func likeTouch(_ sender: Any) {
+        likeButton.isSelected = !likeButton.isSelected
+        likesCount = likeButton.isSelected ? likesCount + 1 : likesCount - 1
+    }
+    
+    @IBAction func saveTouch(_ sender: Any) {
+        saveButton.isSelected = !saveButton.isSelected
     }
 }

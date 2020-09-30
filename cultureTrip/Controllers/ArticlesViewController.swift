@@ -48,7 +48,8 @@ class ArticlesViewController: UIViewController {
         self.view.backgroundColor = .lightGray
     }
     
-    private func loadImage(_ imageURL: String, _ imageView: UIImageView,_ imageCache: NSCache<AnyObject, AnyObject>) {
+    private func loadImage(_ imageURL: String?, _ imageView: UIImageView,_ imageCache: NSCache<AnyObject, AnyObject>) {
+        guard let imageURL = imageURL else { return }
         if let image = imageCache.object(forKey: imageURL as AnyObject) as? UIImage {
             imageView.image = image
         } else {
@@ -68,15 +69,17 @@ extension ArticlesViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: ArticleTableViewCell = tableView.dequeueReusableCell(withIdentifier: ArticleTableViewCell.identifier ) as! ArticleTableViewCell
-          let row = indexPath.section
-          cell.autorNameLabel.text = articles[row].author?.authorName
-          if let imageURL = articles[row].imageURL {
-            loadImage(imageURL, cell.articleImage, imageCache)
-          }
-          if let imageURL = articles[row].author?.authorAvatar?.imageURL {
-             loadImage(imageURL, cell.avatarImage, avatarCache)
-          }
-          return cell
+        let article = articles[indexPath.section]
+        cell.categoryLabel.text = article.category
+        cell.titleLabel.text = article.title
+        cell.autorNameLabel.text = article.author?.authorName
+        cell.updateTimeLabel.text = Date().getFormattedDate(dateString: article.metaData?.updateTime)
+        cell.likeButton.isSelected = article.isLiked ?? false
+        cell.saveButton.isSelected = article.isSaved ?? false
+        cell.likesCount = article.likesCount ?? 0
+        loadImage(article.imageURL, cell.articleImage, imageCache)
+        loadImage(article.author?.authorAvatar?.imageURL, cell.avatarImage, avatarCache)
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

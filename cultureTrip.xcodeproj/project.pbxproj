@@ -22,6 +22,10 @@
 		2B3591BC2523BBE2006848F2 /* NetworkResourseLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3591BB2523BBE2006848F2 /* NetworkResourseLoader.swift */; };
 		2B3591C02523DB9E006848F2 /* NetworkResourseLoader2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3591BF2523DB9E006848F2 /* NetworkResourseLoader2.swift */; };
 		2B3591C22523DFFD006848F2 /* DownloadImageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3591C12523DFFD006848F2 /* DownloadImageHandler.swift */; };
+		2B3591C525247EAA006848F2 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3591C425247EAA006848F2 /* Date+Extension.swift */; };
+		2B3591C72524A44E006848F2 /* UIColor+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3591C62524A44E006848F2 /* UIColor+Extentions.swift */; };
+		2B3591C92524A45D006848F2 /* UIFont+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3591C82524A45D006848F2 /* UIFont+Extentions.swift */; };
+		2B3591CB2524B6BD006848F2 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3591CA2524B6BD006848F2 /* UIImage+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +65,10 @@
 		2B3591BB2523BBE2006848F2 /* NetworkResourseLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResourseLoader.swift; sourceTree = "<group>"; };
 		2B3591BF2523DB9E006848F2 /* NetworkResourseLoader2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResourseLoader2.swift; sourceTree = "<group>"; };
 		2B3591C12523DFFD006848F2 /* DownloadImageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadImageHandler.swift; sourceTree = "<group>"; };
+		2B3591C425247EAA006848F2 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		2B3591C62524A44E006848F2 /* UIColor+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extentions.swift"; sourceTree = "<group>"; };
+		2B3591C82524A45D006848F2 /* UIFont+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extentions.swift"; sourceTree = "<group>"; };
+		2B3591CA2524B6BD006848F2 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +117,7 @@
 		2B35916D25233202006848F2 /* cultureTrip */ = {
 			isa = PBXGroup;
 			children = (
+				2B3591C325247E82006848F2 /* Exeptions */,
 				2B3591B225238D81006848F2 /* Networking */,
 				2B3591AF252340D4006848F2 /* StoryBoards */,
 				2B3591AA25233F2F006848F2 /* Views */,
@@ -167,6 +176,17 @@
 				2B3591C12523DFFD006848F2 /* DownloadImageHandler.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		2B3591C325247E82006848F2 /* Exeptions */ = {
+			isa = PBXGroup;
+			children = (
+				2B3591C425247EAA006848F2 /* Date+Extension.swift */,
+				2B3591C62524A44E006848F2 /* UIColor+Extentions.swift */,
+				2B3591C82524A45D006848F2 /* UIFont+Extentions.swift */,
+				2B3591CA2524B6BD006848F2 /* UIImage+Extensions.swift */,
+			);
+			path = Exeptions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -303,6 +323,7 @@
 			files = (
 				2B3591B825239293006848F2 /* ArticlesResource.swift in Sources */,
 				2B3591AD25233F8A006848F2 /* ArticleTableViewCell.swift in Sources */,
+				2B3591C525247EAA006848F2 /* Date+Extension.swift in Sources */,
 				2B3591C22523DFFD006848F2 /* DownloadImageHandler.swift in Sources */,
 				2B3591BC2523BBE2006848F2 /* NetworkResourseLoader.swift in Sources */,
 				2B3591BA252395AD006848F2 /* ArticlesViewController.swift in Sources */,
@@ -311,6 +332,9 @@
 				2B3591C02523DB9E006848F2 /* NetworkResourseLoader2.swift in Sources */,
 				2B35916F25233202006848F2 /* AppDelegate.swift in Sources */,
 				2B3591B425238EF5006848F2 /* EndPoints.swift in Sources */,
+				2B3591C92524A45D006848F2 /* UIFont+Extentions.swift in Sources */,
+				2B3591CB2524B6BD006848F2 /* UIImage+Extensions.swift in Sources */,
+				2B3591C72524A44E006848F2 /* UIColor+Extentions.swift in Sources */,
 				2B35917125233202006848F2 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
