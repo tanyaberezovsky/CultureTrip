@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum NetworkServiceError: Error {
+public enum NetworkServiceError2: Error {
     case couldNotCreateURLRequest
     case noHTTPURLResponse
     case sessionError(error: Error)
@@ -17,9 +17,9 @@ public enum NetworkServiceError: Error {
     case parsingModel(error: Error)
 }
 
-public enum NetworkResponse<Model> {
+public enum NetworkResponse2<Model> {
   case success(Model)
-  case failure(NetworkServiceError)
+  case failure(NetworkServiceError2)
 }
 
 

@@ -8,8 +8,14 @@
 
 import UIKit
 
+protocol ArticleFieldsDelegate: class {
+    func likeField(isLiked: Bool, likesCount: Int, row: Int)
+    func saveField(isSaved: Bool, row: Int)
+}
+
 class ArticleTableViewCell: UITableViewCell {
     static let identifier: String = "ArticleTableViewCell"
+    weak var delegate: ArticleFieldsDelegate?
 
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var likeButton: UIButton!
@@ -24,9 +30,12 @@ class ArticleTableViewCell: UITableViewCell {
         didSet {
             if likesCount > 0 {
                 likesCountLable.text = "\(String(describing: likesCount))"
+            } else {
+                likesCountLable.text = ""
             }
         }
     }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         setAppearence()
@@ -54,14 +63,22 @@ class ArticleTableViewCell: UITableViewCell {
         titleLabel.textColor = .titleColor
         autorNameLabel.textColor = .subTextColor
         categoryLabel.textColor = .categoryColor
+        likesCountLable.textColor = .activeElementTextColor
+        updateTimeLabel.textColor = .secondarySubTextColor
+
     }
-    
+}
+
+// MARK: Actions
+extension ArticleTableViewCell {
     @IBAction func likeTouch(_ sender: Any) {
         likeButton.isSelected = !likeButton.isSelected
         likesCount = likeButton.isSelected ? likesCount + 1 : likesCount - 1
+        delegate?.likeField(isLiked: likeButton.isSelected, likesCount: likesCount, row: self.tag)
     }
     
     @IBAction func saveTouch(_ sender: Any) {
         saveButton.isSelected = !saveButton.isSelected
+        delegate?.saveField(isSaved: saveButton.isSelected, row: self.tag)
     }
 }

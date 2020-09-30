@@ -15,10 +15,6 @@ class MainViewController: UIViewController {
         // Do any additional setup after loading the view.
         var urlComponents = URLComponents(string: "https://cdn.theculturetrip.com")!
         urlComponents.path = "/home-assignment/response.json"
-        print(urlComponents.url)
-
     }
-
-
 }
 

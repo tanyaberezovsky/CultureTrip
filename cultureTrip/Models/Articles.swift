@@ -30,8 +30,8 @@ struct Article: Codable {
     let metaData: MetaData?
     let id, title: String?
     let imageURL: String?
-    let isSaved, isLiked: Bool?
-    let likesCount: Int?
+    var isSaved, isLiked: Bool?
+    var likesCount: Int?
     let category: String?
     let author: Author?
 

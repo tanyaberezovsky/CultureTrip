@@ -47,16 +47,8 @@ class ArticlesViewController: UIViewController {
     private func setAppearence() {
         self.view.backgroundColor = .lightGray
     }
-    
-    private func loadImage(_ imageURL: String?, _ imageView: UIImageView,_ imageCache: NSCache<AnyObject, AnyObject>) {
-        guard let imageURL = imageURL else { return }
-        if let image = imageCache.object(forKey: imageURL as AnyObject) as? UIImage {
-            imageView.image = image
-        } else {
-            downloadImage(imageURL, RequestHandler(imageView, imageCache: imageCache))
-        }
-    }
 }
+
 //MARK:UITableViewDelegate
 extension ArticlesViewController: UITableViewDataSource, UITableViewDelegate{
     func numberOfSections(in tableView: UITableView) -> Int{
@@ -69,6 +61,8 @@ extension ArticlesViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: ArticleTableViewCell = tableView.dequeueReusableCell(withIdentifier: ArticleTableViewCell.identifier ) as! ArticleTableViewCell
+        cell.delegate = self
+        cell.tag = indexPath.section
         let article = articles[indexPath.section]
         cell.categoryLabel.text = article.category
         cell.titleLabel.text = article.title
@@ -100,8 +94,29 @@ extension ArticlesViewController: UITableViewDataSource, UITableViewDelegate{
     }
 }
 
+// MARK: ArticleFieldsDelegate
+extension ArticlesViewController: ArticleFieldsDelegate {
+    func likeField(isLiked: Bool, likesCount: Int, row: Int) {
+        articles[row].isLiked = isLiked
+        articles[row].likesCount = likesCount
+    }
+    
+    func saveField(isSaved: Bool, row: Int) {
+        articles[row].isSaved = isSaved
+    }
+}
+
 // MARK: Networking
 extension ArticlesViewController {
+    private func loadImage(_ imageURL: String?, _ imageView: UIImageView,_ imageCache: NSCache<AnyObject, AnyObject>) {
+        guard let imageURL = imageURL else { return }
+        if let image = imageCache.object(forKey: imageURL as AnyObject) as? UIImage {
+            imageView.image = image
+        } else {
+            downloadImage(imageURL, RequestHandler(imageView, imageCache: imageCache))
+        }
+    }
+
     private func getArticles() {
         let articlesResource = ArticlesResource()
         _ = resourseLoader.getArticles(resource: articlesResource)  { [weak self] results, errorMessage in
