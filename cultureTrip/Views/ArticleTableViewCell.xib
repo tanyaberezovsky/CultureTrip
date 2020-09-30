@@ -16,18 +16,18 @@
                 <rect key="frame" x="0.0" y="0.0" width="335" height="404"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xEr-dn-yzJ">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xEr-dn-yzJ">
                         <rect key="frame" x="0.0" y="0.0" width="335" height="219"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="219" id="SsH-c3-x19"/>
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B2h-re-riP">
-                        <rect key="frame" x="16" y="16" width="40" height="52"/>
+                        <rect key="frame" x="16" y="16" width="20" height="26"/>
                         <state key="normal" image="save"/>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GYY-Sg-BU4">
-                        <rect key="frame" x="270" y="16" width="49" height="49"/>
+                        <rect key="frame" x="294.5" y="16" width="24.5" height="24.5"/>
                         <state key="normal" image="like"/>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DESIGN" textAlignment="natural" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ABu-8B-WUL">
@@ -113,7 +113,7 @@
             <connections>
                 <outlet property="articleImage" destination="xEr-dn-yzJ" id="guU-jZ-sXM"/>
                 <outlet property="autorNameLabel" destination="vh9-N1-bCw" id="tej-UW-gqr"/>
-                <outlet property="avatarImageLabel" destination="3uN-LQ-8yu" id="SC0-QP-P7q"/>
+                <outlet property="avatarImage" destination="3uN-LQ-8yu" id="SC0-QP-P7q"/>
                 <outlet property="categoryLabel" destination="ABu-8B-WUL" id="sgq-GK-JZa"/>
                 <outlet property="likeButton" destination="GYY-Sg-BU4" id="Zec-Sa-rzb"/>
                 <outlet property="saveButton" destination="B2h-re-riP" id="Jzc-1O-Vau"/>

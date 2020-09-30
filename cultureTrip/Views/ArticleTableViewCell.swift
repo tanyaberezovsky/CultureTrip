@@ -16,7 +16,7 @@ class ArticleTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var autorNameLabel: UILabel!
     @IBOutlet weak var updateTimeLabel: UILabel!
-    @IBOutlet weak var avatarImageLabel: UIImageView!
+    @IBOutlet weak var avatarImage: UIImageView!
     
     static let identifier: String = "ArticleTableViewCell"
 

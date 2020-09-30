@@ -15,7 +15,7 @@ class NetworkResourseLoader {
     var dataTask: URLSessionDataTask?
     var errorMessage = ""
     
-    typealias QueryResult = ([Article]?, String) -> Void
+    typealias QueryResult = ([Any]?, String) -> Void
   //  typealias ResourseResult = (NetworkResponse<Resource.Model>) -> Void
     
     init(session: URLSession = URLSession.shared) {
@@ -23,6 +23,7 @@ class NetworkResourseLoader {
     }
     func getArticles(resource: Resource, completion: @escaping QueryResult) {
         cleanState()
+        
 //        guard let urlComponents = URLComponents(string: resource.fullPath), let url = urlComponents.url else {
 //            return
 //        }

@@ -14,7 +14,10 @@ class ArticlesViewController: UIViewController {
     
     private let resourseLoader = NetworkResourseLoader()
     private var articles = [Article]()
-    
+    private var imageCache = NSCache<AnyObject, AnyObject>()
+    private var avatarCache = NSCache<AnyObject, AnyObject>()
+    private let cellSpacingHeight: CGFloat = 16
+
     override func viewDidLoad() {
         super.viewDidLoad()
         initTableView()
@@ -28,8 +31,8 @@ class ArticlesViewController: UIViewController {
 }
 
 //MARK: Private functions
-private extension ArticlesViewController {
-    func initTableView() {
+ extension ArticlesViewController {
+    private func initTableView() {
         let nib = UINib.init(nibName: ArticleTableViewCell.identifier , bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: ArticleTableViewCell.identifier)
 
@@ -41,34 +44,56 @@ private extension ArticlesViewController {
         tableView.separatorStyle = .none
     }
     
-    func setAppearence() {
+    private func setAppearence() {
         self.view.backgroundColor = .lightGray
+    }
+    
+    private func loadImage(_ imageURL: String, _ imageView: UIImageView,_ imageCache: NSCache<AnyObject, AnyObject>) {
+        if let image = imageCache.object(forKey: imageURL as AnyObject) as? UIImage {
+            imageView.image = image
+        } else {
+            downloadImage(imageURL, RequestHandler(imageView, imageCache: imageCache))
+        }
     }
 }
 //MARK:UITableViewDelegate
 extension ArticlesViewController: UITableViewDataSource, UITableViewDelegate{
     func numberOfSections(in tableView: UITableView) -> Int{
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return articles.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return getEditFieldCell(cellForRowAt: indexPath)
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
     }
-
-    func getEditFieldCell(cellForRowAt indexPath: IndexPath)->UITableViewCell{
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: ArticleTableViewCell = tableView.dequeueReusableCell(withIdentifier: ArticleTableViewCell.identifier ) as! ArticleTableViewCell
-        let row = indexPath.row
-        cell.autorNameLabel.text = self.articles[row].author?.authorName
-
-        return cell
+          let row = indexPath.section
+          cell.autorNameLabel.text = articles[row].author?.authorName
+          if let imageURL = articles[row].imageURL {
+            loadImage(imageURL, cell.articleImage, imageCache)
+          }
+          if let imageURL = articles[row].author?.authorAvatar?.imageURL {
+             loadImage(imageURL, cell.avatarImage, avatarCache)
+          }
+          return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor.systemGroupedBackground
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 0
+        }
+        return cellSpacingHeight
     }
 }
 
@@ -78,7 +103,7 @@ extension ArticlesViewController {
         let articlesResource = ArticlesResource()
         _ = resourseLoader.getArticles(resource: articlesResource)  { [weak self] results, errorMessage in
              
-             if let results = results {
+            if let results = results as? [Article] {
                 self?.articles = results
                 self?.tableView.reloadData()
              }

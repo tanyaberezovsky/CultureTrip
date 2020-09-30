@@ -23,33 +23,6 @@ extension ArticlesContainer {
     init(data: Data) throws {
         self = try newJSONDecoder().decode(ArticlesContainer.self, from: data)
     }
-
-    init(_ json: String, using encoding: String.Encoding = .utf8) throws {
-        guard let data = json.data(using: encoding) else {
-            throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
-        }
-        try self.init(data: data)
-    }
-
-    init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
-    }
-
-    func with(
-        articles: [Article]
-    ) -> ArticlesContainer {
-        return ArticlesContainer(
-            articles: articles
-        )
-    }
-
-    func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
-    }
-
-    func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try self.jsonData(), encoding: encoding)
-    }
 }
 
 // MARK: - Article
@@ -75,49 +48,6 @@ extension Article {
     init(data: Data) throws {
         self = try newJSONDecoder().decode(Article.self, from: data)
     }
-
-    init(_ json: String, using encoding: String.Encoding = .utf8) throws {
-        guard let data = json.data(using: encoding) else {
-            throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
-        }
-        try self.init(data: data)
-    }
-
-    init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
-    }
-
-    func with(
-        metaData: MetaData?? = nil,
-        id: String?? = nil,
-        title: String?? = nil,
-        imageURL: String?? = nil,
-        isSaved: Bool?? = nil,
-        isLiked: Bool?? = nil,
-        likesCount: Int?? = nil,
-        category: String?? = nil,
-        author: Author?? = nil
-    ) -> Article {
-        return Article(
-            metaData: metaData ?? self.metaData,
-            id: id ?? self.id,
-            title: title ?? self.title,
-            imageURL: imageURL ?? self.imageURL,
-            isSaved: isSaved ?? self.isSaved,
-            isLiked: isLiked ?? self.isLiked,
-            likesCount: likesCount ?? self.likesCount,
-            category: category ?? self.category,
-            author: author ?? self.author
-        )
-    }
-
-    func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
-    }
-
-    func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try self.jsonData(), encoding: encoding)
-    }
 }
 
 // MARK: - Author
@@ -131,37 +61,6 @@ struct Author: Codable {
 extension Author {
     init(data: Data) throws {
         self = try newJSONDecoder().decode(Author.self, from: data)
-    }
-
-    init(_ json: String, using encoding: String.Encoding = .utf8) throws {
-        guard let data = json.data(using: encoding) else {
-            throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
-        }
-        try self.init(data: data)
-    }
-
-    init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
-    }
-
-    func with(
-        id: String?? = nil,
-        authorName: String?? = nil,
-        authorAvatar: AuthorAvatar?? = nil
-    ) -> Author {
-        return Author(
-            id: id ?? self.id,
-            authorName: authorName ?? self.authorName,
-            authorAvatar: authorAvatar ?? self.authorAvatar
-        )
-    }
-
-    func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
-    }
-
-    func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try self.jsonData(), encoding: encoding)
     }
 }
 
@@ -180,33 +79,6 @@ extension AuthorAvatar {
     init(data: Data) throws {
         self = try newJSONDecoder().decode(AuthorAvatar.self, from: data)
     }
-
-    init(_ json: String, using encoding: String.Encoding = .utf8) throws {
-        guard let data = json.data(using: encoding) else {
-            throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
-        }
-        try self.init(data: data)
-    }
-
-    init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
-    }
-
-    func with(
-        imageURL: String?? = nil
-    ) -> AuthorAvatar {
-        return AuthorAvatar(
-            imageURL: imageURL ?? self.imageURL
-        )
-    }
-
-    func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
-    }
-
-    func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try self.jsonData(), encoding: encoding)
-    }
 }
 
 // MARK: - MetaData
@@ -219,35 +91,6 @@ struct MetaData: Codable {
 extension MetaData {
     init(data: Data) throws {
         self = try newJSONDecoder().decode(MetaData.self, from: data)
-    }
-
-    init(_ json: String, using encoding: String.Encoding = .utf8) throws {
-        guard let data = json.data(using: encoding) else {
-            throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
-        }
-        try self.init(data: data)
-    }
-
-    init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
-    }
-
-    func with(
-        creationTime: String?? = nil,
-        updateTime: String?? = nil
-    ) -> MetaData {
-        return MetaData(
-            creationTime: creationTime ?? self.creationTime,
-            updateTime: updateTime ?? self.updateTime
-        )
-    }
-
-    func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
-    }
-
-    func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try self.jsonData(), encoding: encoding)
     }
 }
 

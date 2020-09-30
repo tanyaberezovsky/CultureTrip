@@ -9,13 +9,13 @@
 import UIKit
 
 protocol DownloadImageHandler {
-    func processRequest(_ data:Data, url:String)
+    func processRequest(_ data: Data, url: String)
 }
 
-func downloadImage( _ urlStr:String, _ handler:DownloadImageHandler)
+func downloadImage( _ urlStr: String, _ handler: DownloadImageHandler)
 {
     
-    guard let url:URL = URL(string: urlStr) else {
+    guard let url: URL = URL(string: urlStr) else {
         return
     }
     let session = URLSession.shared
@@ -38,7 +38,7 @@ func downloadImage( _ urlStr:String, _ handler:DownloadImageHandler)
     
 }
 
-class RequestHandler : NSObject, DownloadImageHandler {
+class RequestHandler: NSObject, DownloadImageHandler {
     
     var image:UIImageView? = nil
     var imageCache: NSCache<AnyObject, AnyObject>
@@ -50,7 +50,7 @@ class RequestHandler : NSObject, DownloadImageHandler {
         // self.images
     }
     
-    func processRequest(_ data:Data, url:String)
+    func processRequest(_ data: Data, url: String)
     {
         let image_data = UIImage(data: data)
         imageCache.setObject(image_data!, forKey: url as AnyObject)
