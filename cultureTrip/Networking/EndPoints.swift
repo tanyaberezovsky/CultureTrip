@@ -8,14 +8,14 @@
 
 import Foundation
 
-public struct NetworkConfiguration {
-    public static let baseUrl = "https://cdn.theculturetrip.com"
+struct NetworkConfiguration {
+    static let baseUrl = "https://cdn.theculturetrip.com"
 }
 
 public enum Endpoints {
     case article
 
-    public var path: String {
+    var path: String {
         switch self {
         case .article:
             return "/home-assignment/response.json"

@@ -40,8 +40,8 @@ func downloadImage( _ urlStr: String, _ handler: DownloadImageHandler)
 
 class RequestHandler: NSObject, DownloadImageHandler {
     
-    var image:UIImageView? = nil
-    var imageCache: NSCache<AnyObject, AnyObject>
+    private var image:UIImageView? = nil
+    private var imageCache: NSCache<AnyObject, AnyObject>
     
     init(_ image: UIImageView, imageCache: NSCache<AnyObject, AnyObject>)
     {

@@ -7,91 +7,48 @@
 //
 
 import Foundation
-public enum NetworkServiceError: Error {
-    case couldNotCreateURLRequest
-    case noHTTPURLResponse
-    case sessionError(error: Error)
-    case statusCodeError(statusCode: Int)
-    case noDataProvided
-    case parsingModel(error: Error)
-}
 
-
-public enum NetworkResponse {
-  case success(Any)
-  case failure(NetworkServiceError)
-}
-
-open class NetworkDataResourceService {
-}
 class NetworkResourseLoader {
+    private var service: NetworkDataResourceService
     
-   let defaultSession: URLSession
-    
-    var dataTask: URLSessionDataTask?
-    var errorMessage = ""
-    
-    typealias QueryResult = ([Any]?, String) -> Void
-  //  typealias ResourseResult = (NetworkResponse<Resource.Model>) -> Void
-//    public init(service: NetworkDataResourceService = NetworkDataResourceService()) {
-//        self.service = service
-//    }
-    init(session: URLSession = URLSession.shared) {
-        self.defaultSession = session
+    public init(service: NetworkDataResourceService = NetworkDataResourceService()) {
+        self.service = service
     }
-    func getArticles(resource: Resource, completion: @escaping QueryResult) {
-        cleanState()
-        
-//        guard let urlComponents = URLComponents(string: resource.fullPath), let url = urlComponents.url else {
-//            return
-//        }
-        print(resource.url.absoluteString)
-        print(resource.url)
-        dataTask = defaultSession.dataTask(with: resource.url) { [weak self] data, response, error in
-//        defer {
-//          self?.dataTask = nil
-//        }
-        
-        if let error = error {
-          self?.errorMessage += "DataTask error: " + error.localizedDescription + "\n"
-        } else if
-          let data = data,
-          let response = response as? HTTPURLResponse,
-          response.statusCode == 200 {
-          let articles = self?.serializeArticles(data)
-          
-          DispatchQueue.main.async {
-            completion(articles, self?.errorMessage ?? "")
-          }
+  
+    func getArticles(resource: Resource, completion: @escaping (NetworkResponse) -> Void) {
+
+        service.fetch(resource: resource) { [weak self] response in
+            switch response {
+            case .success(let data):
+                guard let data = data as? Data else {
+                    return completion(.failure(.noDataProvided))
+                }
+                
+                do {
+                    let articles = try self?.serializeArticles(data)
+                    completion(.success(articles))                    
+                } catch let error {
+                    completion(.failure(.parsingModel(error: error)))
+                }
+            case .failure(let networkServiceError):
+                completion(.failure(networkServiceError))
+            }
+            
         }
-      }
-      dataTask?.resume()
     }
 }
-
 
 // MARK: - Private Methods
 private extension NetworkResourseLoader {
-    func cleanState() {
-         dataTask?.cancel()
-         errorMessage = ""
-    }
-
-    func serializeArticles(_ data: Data) -> [Article]? {
+    
+    func serializeArticles(_ data: Data) throws -> [Article] {
       var articles: [Article]
       
       do {
         articles = try ArticlesContainer(data: data).articles
       } catch let parseError as NSError {
-        errorMessage += "JSONSerialization error: \(parseError.localizedDescription)\n"
-        return nil
+        throw parseError
       }
-      
-      if articles.count == 0 {
-        errorMessage += "Dictionary does not contain results key\n"
-        return nil
-      }
-      
       return articles
     }
   }

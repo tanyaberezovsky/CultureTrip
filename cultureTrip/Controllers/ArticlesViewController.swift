@@ -22,9 +22,12 @@ class ArticlesViewController: UIViewController {
         super.viewDidLoad()
         initTableView()
         setAppearence()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         getArticles()
     }
-    
+
     deinit{
            print("deinit \(String(describing: self))")
     }
@@ -119,26 +122,17 @@ extension ArticlesViewController {
 
     private func getArticles() {
         let articlesResource = ArticlesResource()
-        _ = resourseLoader.getArticles(resource: articlesResource)  { [weak self] results, errorMessage in
-             
-            if let results = results as? [Article] {
-                self?.articles = results
-                self?.tableView.reloadData()
-             }
-             
-             if !errorMessage.isEmpty {
-               print("Search error: " + errorMessage)
-             }
-           }
-//           _ = networkHandler.fetch(resource: articlesResource) { networkResponse in
-//               switch networkResponse {
-//               case .success(let model, _):
-//                   print(model)
-//
-//               case .failure(let networkServerError, let httpUrlResponce):
-//                   //    Alert.showBasic(title: "", message: networkServerError.localizedDescription, vc: self)
-//                   break
-//               }
-//           }
-       }
+        _ = resourseLoader.getArticles(resource: articlesResource)  { [weak self] result in
+            DispatchQueue.main.async {
+                 switch result {
+                 case .success(let successResult):
+                    guard let articles = successResult as? [Article] else { return }
+                    self?.articles = articles
+                        self?.tableView.reloadData()
+                 case .failure(let networkServerError):
+                    print("networkServerError: \(networkServerError)")
+                }
+            }
+        }
+    }
 }

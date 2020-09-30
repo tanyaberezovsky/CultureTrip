@@ -8,7 +8,6 @@
 
 import Foundation
 
-// MARK: - Articles
 struct ArticlesContainer: Codable {
     let articles: [Article]
 
@@ -17,15 +16,12 @@ struct ArticlesContainer: Codable {
     }
 }
 
-// MARK: Articles convenience initializers and mutators
-
 extension ArticlesContainer {
     init(data: Data) throws {
         self = try newJSONDecoder().decode(ArticlesContainer.self, from: data)
     }
 }
 
-// MARK: - Article
 struct Article: Codable {
     let metaData: MetaData?
     let id, title: String?
@@ -42,21 +38,16 @@ struct Article: Codable {
     }
 }
 
-// MARK: Article convenience initializers and mutators
-
 extension Article {
     init(data: Data) throws {
         self = try newJSONDecoder().decode(Article.self, from: data)
     }
 }
 
-// MARK: - Author
 struct Author: Codable {
     let id, authorName: String?
     let authorAvatar: AuthorAvatar?
 }
-
-// MARK: Author convenience initializers and mutators
 
 extension Author {
     init(data: Data) throws {
@@ -64,7 +55,6 @@ extension Author {
     }
 }
 
-// MARK: - AuthorAvatar
 struct AuthorAvatar: Codable {
     let imageURL: String?
 
@@ -73,28 +63,21 @@ struct AuthorAvatar: Codable {
     }
 }
 
-// MARK: AuthorAvatar convenience initializers and mutators
-
 extension AuthorAvatar {
     init(data: Data) throws {
         self = try newJSONDecoder().decode(AuthorAvatar.self, from: data)
     }
 }
 
-// MARK: - MetaData
 struct MetaData: Codable {
     let creationTime, updateTime: String?
 }
-
-// MARK: MetaData convenience initializers and mutators
 
 extension MetaData {
     init(data: Data) throws {
         self = try newJSONDecoder().decode(MetaData.self, from: data)
     }
 }
-
-// MARK: - Helper functions for creating encoders and decoders
 
 func newJSONDecoder() -> JSONDecoder {
     let decoder = JSONDecoder()
