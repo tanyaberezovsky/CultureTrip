@@ -30,23 +30,6 @@
 		2B9E67D725250E2A00A2FBF1 /* NetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9E67D625250E2A00A2FBF1 /* NetworkResponse.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		2B35918225233203006848F2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2B35916325233202006848F2 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2B35916A25233202006848F2;
-			remoteInfo = cultureTrip;
-		};
-		2B35918D25233203006848F2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2B35916325233202006848F2 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2B35916A25233202006848F2;
-			remoteInfo = cultureTrip;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		2B35916B25233202006848F2 /* cultureTrip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cultureTrip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B35916E25233202006848F2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -56,8 +39,6 @@
 		2B35917725233203006848F2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2B35917A25233203006848F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2B35917C25233203006848F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2B35918125233203006848F2 /* cultureTripTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cultureTripTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2B35918C25233203006848F2 /* cultureTripUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cultureTripUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B3591AB25233F8A006848F2 /* ArticleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTableViewCell.swift; sourceTree = "<group>"; };
 		2B3591AC25233F8A006848F2 /* ArticleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleTableViewCell.xib; sourceTree = "<group>"; };
 		2B3591B025237E78006848F2 /* Articles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Articles.swift; sourceTree = "<group>"; };
@@ -83,20 +64,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2B35917E25233203006848F2 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2B35918925233203006848F2 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -112,8 +79,6 @@
 			isa = PBXGroup;
 			children = (
 				2B35916B25233202006848F2 /* cultureTrip.app */,
-				2B35918125233203006848F2 /* cultureTripTests.xctest */,
-				2B35918C25233203006848F2 /* cultureTripUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -215,42 +180,6 @@
 			productReference = 2B35916B25233202006848F2 /* cultureTrip.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2B35918025233203006848F2 /* cultureTripTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2B35919825233203006848F2 /* Build configuration list for PBXNativeTarget "cultureTripTests" */;
-			buildPhases = (
-				2B35917D25233203006848F2 /* Sources */,
-				2B35917E25233203006848F2 /* Frameworks */,
-				2B35917F25233203006848F2 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				2B35918325233203006848F2 /* PBXTargetDependency */,
-			);
-			name = cultureTripTests;
-			productName = cultureTripTests;
-			productReference = 2B35918125233203006848F2 /* cultureTripTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		2B35918B25233203006848F2 /* cultureTripUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2B35919B25233203006848F2 /* Build configuration list for PBXNativeTarget "cultureTripUITests" */;
-			buildPhases = (
-				2B35918825233203006848F2 /* Sources */,
-				2B35918925233203006848F2 /* Frameworks */,
-				2B35918A25233203006848F2 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				2B35918E25233203006848F2 /* PBXTargetDependency */,
-			);
-			name = cultureTripUITests;
-			productName = cultureTripUITests;
-			productReference = 2B35918C25233203006848F2 /* cultureTripUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -263,14 +192,6 @@
 				TargetAttributes = {
 					2B35916A25233202006848F2 = {
 						CreatedOnToolsVersion = 11.3;
-					};
-					2B35918025233203006848F2 = {
-						CreatedOnToolsVersion = 11.3;
-						TestTargetID = 2B35916A25233202006848F2;
-					};
-					2B35918B25233203006848F2 = {
-						CreatedOnToolsVersion = 11.3;
-						TestTargetID = 2B35916A25233202006848F2;
 					};
 				};
 			};
@@ -288,8 +209,6 @@
 			projectRoot = "";
 			targets = (
 				2B35916A25233202006848F2 /* cultureTrip */,
-				2B35918025233203006848F2 /* cultureTripTests */,
-				2B35918B25233203006848F2 /* cultureTripUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -303,20 +222,6 @@
 				2B35917B25233203006848F2 /* LaunchScreen.storyboard in Resources */,
 				2B35917825233203006848F2 /* Assets.xcassets in Resources */,
 				2B35917625233202006848F2 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2B35917F25233203006848F2 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2B35918A25233203006848F2 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,34 +252,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2B35917D25233203006848F2 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2B35918825233203006848F2 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		2B35918325233203006848F2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 2B35916A25233202006848F2 /* cultureTrip */;
-			targetProxy = 2B35918225233203006848F2 /* PBXContainerItemProxy */;
-		};
-		2B35918E25233203006848F2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 2B35916A25233202006848F2 /* cultureTrip */;
-			targetProxy = 2B35918D25233203006848F2 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		2B35917425233202006848F2 /* Main.storyboard */ = {
@@ -546,90 +424,6 @@
 			};
 			name = Release;
 		};
-		2B35919925233203006848F2 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 36B2GZZ9DF;
-				INFOPLIST_FILE = cultureTripTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Crow.Crow.cultureTripTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/cultureTrip.app/cultureTrip";
-			};
-			name = Debug;
-		};
-		2B35919A25233203006848F2 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 36B2GZZ9DF;
-				INFOPLIST_FILE = cultureTripTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Crow.Crow.cultureTripTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/cultureTrip.app/cultureTrip";
-			};
-			name = Release;
-		};
-		2B35919C25233203006848F2 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 36B2GZZ9DF;
-				INFOPLIST_FILE = cultureTripUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Crow.Crow.cultureTripUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = cultureTrip;
-			};
-			name = Debug;
-		};
-		2B35919D25233203006848F2 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 36B2GZZ9DF;
-				INFOPLIST_FILE = cultureTripUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Crow.Crow.cultureTripUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = cultureTrip;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -647,24 +441,6 @@
 			buildConfigurations = (
 				2B35919625233203006848F2 /* Debug */,
 				2B35919725233203006848F2 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		2B35919825233203006848F2 /* Build configuration list for PBXNativeTarget "cultureTripTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2B35919925233203006848F2 /* Debug */,
-				2B35919A25233203006848F2 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		2B35919B25233203006848F2 /* Build configuration list for PBXNativeTarget "cultureTripUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2B35919C25233203006848F2 /* Debug */,
-				2B35919D25233203006848F2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
