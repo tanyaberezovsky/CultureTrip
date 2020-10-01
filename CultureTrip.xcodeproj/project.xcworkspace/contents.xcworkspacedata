@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:cultureTrip.xcodeproj">
+      location = "self:/Users/tanya/crow/projects/cultureTrip/CultureTrip.xcodeproj">
    </FileRef>
 </Workspace>
