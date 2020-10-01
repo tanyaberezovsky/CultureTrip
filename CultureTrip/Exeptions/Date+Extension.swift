@@ -17,7 +17,7 @@ extension Date {
                case .long:
                     return "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
                case .short:
-                    return "dd MMM, yyyy"
+                    return "d MMM, yyyy"
                }
         }
     }

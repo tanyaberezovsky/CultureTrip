@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import CultureTrip
 
 class CultureTripTests: XCTestCase {
 
@@ -28,6 +29,18 @@ class CultureTripTests: XCTestCase {
         measure {
             // Put the code you want to measure the time of here.
         }
+    }
+    
+    func testDateFormatterOneDigit() {
+        let formatedDate = Date().getFormattedDate(dateString: "2016-04-04T20:55:21.000Z")
+        let expected = "4 Apr, 2016"
+        XCTAssertEqual(formatedDate, expected)
+    }
+    
+    func testDateFormatterTwoDigit() {
+        let formatedDate = Date().getFormattedDate(dateString: "2016-04-25T20:55:21.000Z")
+        let expected = "25 Apr, 2016"
+        XCTAssertEqual(formatedDate, expected)
     }
 
 }
