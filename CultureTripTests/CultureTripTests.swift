@@ -1,13 +1,12 @@
 //
-//  cultureTripTests.swift
-//  cultureTripTests
+//  CultureTripTests.swift
+//  CultureTripTests
 //
 //  Created by Tanya Berezovsky on 01/10/2020.
 //  Copyright © 2020 Tanya Berezovsky. All rights reserved.
 //
 
 import XCTest
-@testable import CultureTrip
 
 class CultureTripTests: XCTestCase {
 
