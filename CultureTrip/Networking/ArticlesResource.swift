@@ -8,10 +8,6 @@
 
 import Foundation
 
-protocol Resource {
-    var url: URL { get }
-}
-
 struct ArticlesResource: Resource {
     var url: URL { return Endpoints.article.getURL }
 }
