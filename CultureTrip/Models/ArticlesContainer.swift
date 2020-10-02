@@ -9,7 +9,7 @@
 import Foundation
 
 struct ArticlesContainer: Codable {
-    let articles: [Article]
+    let articles: [Article]?
 
     enum CodingKeys: String, CodingKey {
         case articles = "data"

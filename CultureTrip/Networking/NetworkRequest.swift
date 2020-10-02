@@ -1,22 +1,22 @@
 //
-//  NetworkDataResourceService.swift
-//  cultureTrip
+//  NetworkRequest.swift
+//  CultureTrip
 //
-//  Created by Tanya Berezovsky on 30/09/2020.
+//  Created by Tanya Berezovsky on 02/10/2020.
 //  Copyright © 2020 Tanya Berezovsky. All rights reserved.
 //
 
 import Foundation
 
-class NetworkDataResourceService {
+class NetworkRequest {
     private let session: URLSession
     private var dataTask: URLSessionDataTask?
 
     init(session: URLSession = URLSession.shared) {
-          self.session = session
+        self.session = session
     }
    
-    func fetch(resource: Resource, completion: @escaping (NetworkResponse) -> Void) {
+    func fetch<ApiResource: Resource>(resource: ApiResource, completion: @escaping (NetworkResponse<ApiResource>) -> Void) {
         cleanState()
         dataTask = session.dataTask(with: resource.url) { [weak self] data, response, error in
             defer {
@@ -29,7 +29,12 @@ class NetworkDataResourceService {
             guard let response = response  as? HTTPURLResponse else { return completion(.failure(.noHTTPURLResponse)) }
             
             if response.statusCode == 200 {
-                return completion(.success(data))
+                do {
+                  let results = try resource.model(data: data)
+                    return completion(.success(results))
+                } catch let parseError as NSError {
+                    return completion(.failure(.parsingModel(error: parseError)))
+                }
             } else {
                 return completion(.failure(.statusCodeError(statusCode: response.statusCode)))
             }
@@ -38,7 +43,7 @@ class NetworkDataResourceService {
     }
 }
 // MARK: - Private Methods
-private extension NetworkDataResourceService {
+private extension NetworkRequest {
     func cleanState() {
          dataTask?.cancel()
     }

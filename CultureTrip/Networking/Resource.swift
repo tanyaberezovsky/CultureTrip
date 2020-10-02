@@ -9,6 +9,8 @@
 import Foundation
 
 protocol Resource {
+    associatedtype Model: Codable
     var url: URL { get }
-    //other properties
+    func model(data: Data) throws -> Model
+    //other properties or functions
 }

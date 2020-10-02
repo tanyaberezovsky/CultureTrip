@@ -9,6 +9,10 @@
 import Foundation
 
 struct ArticlesResource: Resource {
+    typealias Model = ArticlesContainer
     var url: URL { return Endpoints.article.getURL }
+    func model(data: Data) throws -> ArticlesContainer {
+        return try ArticlesContainer(data: data)
+    }
 }
 

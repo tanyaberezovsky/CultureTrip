@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum NetworkResponse {
-  case success(Any?)
-  case failure(NetworkServiceError)
+enum NetworkResponse<ApiResource: Resource> {
+    case success(ApiResource.Model)
+    case failure(NetworkServiceError)
 }

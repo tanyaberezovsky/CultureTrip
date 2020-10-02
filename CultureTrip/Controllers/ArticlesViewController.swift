@@ -12,7 +12,7 @@ class ArticlesViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    private let resourseLoader = NetworkResourseLoader()
+    private let resourseLoader = NetworkRequest() 
     private var articles = [Article]()
     private var imageCache = NSCache<AnyObject, AnyObject>()
     private var avatarCache = NSCache<AnyObject, AnyObject>()
@@ -122,17 +122,17 @@ extension ArticlesViewController {
 
     private func getArticles() {
         let articlesResource = ArticlesResource()
-        _ = resourseLoader.getArticles(resource: articlesResource)  { [weak self] result in
-            DispatchQueue.main.async {
-                 switch result {
-                 case .success(let successResult):
-                    guard let articles = successResult as? [Article] else { return }
-                    self?.articles = articles
-                        self?.tableView.reloadData()
-                 case .failure(let networkServerError):
-                    print("networkServerError: \(networkServerError)")
-                }
-            }
-        }
+        _ = resourseLoader.fetch(resource: articlesResource)  { [weak self] result in
+                   DispatchQueue.main.async {
+                        switch result {
+                        case .success(let successResult):
+                            guard let articles = successResult.articles else { return }
+                            self?.articles = articles
+                            self?.tableView.reloadData()
+                        case .failure(let networkServerError):
+                           print("networkServerError: \(networkServerError)")
+                       }
+                   }
+               }
     }
 }
