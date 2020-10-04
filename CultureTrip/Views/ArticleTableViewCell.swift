@@ -45,7 +45,7 @@ class ArticleTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
-    func setAppearence() {
+    private func setAppearence() {
         likeButton.setImage(UIImage(assetIdentifier: .like), for: .normal)
         likeButton.setImage(UIImage(assetIdentifier: .liked), for: .selected)
         
@@ -71,13 +71,13 @@ class ArticleTableViewCell: UITableViewCell {
 
 // MARK: Actions
 extension ArticleTableViewCell {
-    @IBAction func likeTouch(_ sender: Any) {
+    @IBAction private func likeTouch(_ sender: Any) {
         likeButton.isSelected = !likeButton.isSelected
         likesCount = likeButton.isSelected ? likesCount + 1 : likesCount - 1
         delegate?.likeField(isLiked: likeButton.isSelected, likesCount: likesCount, row: self.tag)
     }
     
-    @IBAction func saveTouch(_ sender: Any) {
+    @IBAction private func saveTouch(_ sender: Any) {
         saveButton.isSelected = !saveButton.isSelected
         delegate?.saveField(isSaved: saveButton.isSelected, row: self.tag)
     }

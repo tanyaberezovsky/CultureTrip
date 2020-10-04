@@ -12,7 +12,7 @@ struct NetworkConfiguration {
     static let baseUrl = "https://cdn.theculturetrip.com"
 }
 
-public enum Endpoints {
+enum Endpoints {
     case article
 
     var path: String {
@@ -22,7 +22,7 @@ public enum Endpoints {
         }
     }
     
-    public var getURL: URL {
+    var getURL: URL {
         URL(string: NetworkConfiguration.baseUrl)!.appendingPathComponent(self.path)
     }
 }

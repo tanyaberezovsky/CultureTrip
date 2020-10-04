@@ -161,11 +161,11 @@
 		2B3591B225238D81006848F2 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				2B3FB5D225273AAF008BBDFF /* CustomResources */,
 				2B3591B325238EF5006848F2 /* EndPoints.swift */,
 				2B9E67D625250E2A00A2FBF1 /* NetworkResponse.swift */,
 				2B3FB5C7252721D1008BBDFF /* Resource.swift */,
 				2B3FB5CA2527255D008BBDFF /* NetworkRequest.swift */,
-				2B3591B725239293006848F2 /* ArticlesResource.swift */,
 				2B3591C12523DFFD006848F2 /* DownloadImageHandler.swift */,
 				2B9E67D425250DFF00A2FBF1 /* NetworkServiceError.swift */,
 			);
@@ -181,6 +181,14 @@
 				2B3591CA2524B6BD006848F2 /* UIImage+Extensions.swift */,
 			);
 			path = Exeptions;
+			sourceTree = "<group>";
+		};
+		2B3FB5D225273AAF008BBDFF /* CustomResources */ = {
+			isa = PBXGroup;
+			children = (
+				2B3591B725239293006848F2 /* ArticlesResource.swift */,
+			);
+			path = CustomResources;
 			sourceTree = "<group>";
 		};
 		2B9E67EB2525C26500A2FBF1 /* CultureTripTests */ = {
