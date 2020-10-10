@@ -8,24 +8,21 @@
 
 import UIKit
 
-protocol ArticleFieldsDelegate: class {
-    func likeField(isLiked: Bool, likesCount: Int, row: Int)
-    func saveField(isSaved: Bool, row: Int)
-}
-
 class ArticleTableViewCell: UITableViewCell {
+    //MARK: - IBOutlets
+    @IBOutlet private weak var saveButton: UIButton!
+    @IBOutlet private weak var likeButton: UIButton!
+    @IBOutlet private weak var articleImageView: UIImageView!
+    @IBOutlet private weak var categoryLabel: UILabel!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var autorNameLabel: UILabel!
+    @IBOutlet private weak var updateTimeLabel: UILabel!
+    @IBOutlet private weak var avatarImageView: UIImageView!
+    @IBOutlet private weak var likesCountLable: UILabel!
+    
+    //MARK: - Class Properties
     static let identifier: String = "ArticleTableViewCell"
     weak var delegate: ArticleFieldsDelegate?
-
-    @IBOutlet weak var saveButton: UIButton!
-    @IBOutlet weak var likeButton: UIButton!
-    @IBOutlet weak var articleImage: UIImageView!
-    @IBOutlet weak var categoryLabel: UILabel!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var autorNameLabel: UILabel!
-    @IBOutlet weak var updateTimeLabel: UILabel!
-    @IBOutlet weak var avatarImage: UIImageView!
-    @IBOutlet private weak var likesCountLable: UILabel!
     var likesCount: Int = 0 {
         didSet {
             if likesCount > 0 {
@@ -36,15 +33,58 @@ class ArticleTableViewCell: UITableViewCell {
         }
     }
     
+    //MARK: - Configuratte cell data
+    var viewModel: ArticleViewModelProtocol? {
+        didSet {
+            guard let viewModel = self.viewModel else {
+                return
+            }
+            self.categoryLabel.text = viewModel.category
+            self.titleLabel.text = viewModel.title
+            self.autorNameLabel.text = viewModel.authorName
+            self.updateTimeLabel.text = viewModel.updateTime
+            self.likeButton.isSelected = viewModel.isLiked
+            self.saveButton.isSelected = viewModel.isSaved
+            self.likesCount = viewModel.likesCount
+            //self.avatarImageView.image = viewModel.articleImage ?? UIImage()
+        }
+    }
+    
+    var articleImage: UIImage = UIImage() {
+        didSet {
+            self.articleImageView.image = articleImage
+        }
+    }
+    
+    //MARK: - UITableViewCell events
     override func awakeFromNib() {
         super.awakeFromNib()
         setAppearence()
     }
-
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        articleImageView.image = nil
+        avatarImageView.image = nil
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
 
+    // MARK: IBActions
+    @IBAction private func likeTouch(_ sender: Any) {
+        likeButton.isSelected = !likeButton.isSelected
+        likesCount = likeButton.isSelected ? likesCount + 1 : likesCount - 1
+        delegate?.likeField(isLiked: likeButton.isSelected, likesCount: likesCount, row: self.tag)
+    }
+    
+    @IBAction private func saveTouch(_ sender: Any) {
+        saveButton.isSelected = !saveButton.isSelected
+        delegate?.saveField(isSaved: saveButton.isSelected, row: self.tag)
+    }
+    
+    //MARK: - Private methods
     private func setAppearence() {
         likeButton.setImage(UIImage(assetIdentifier: .like), for: .normal)
         likeButton.setImage(UIImage(assetIdentifier: .liked), for: .selected)
@@ -53,8 +93,8 @@ class ArticleTableViewCell: UITableViewCell {
         saveButton.setImage(UIImage(assetIdentifier: .saved), for: .selected)
         
         backgroundColor = .white
-        avatarImage.layer.cornerRadius = avatarImage.frame.size.width / 2
-        avatarImage.clipsToBounds = true
+        avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width / 2
+        avatarImageView.clipsToBounds = true
         
         titleLabel.font = .titleFont
         autorNameLabel.font = .subTextFont
@@ -65,20 +105,5 @@ class ArticleTableViewCell: UITableViewCell {
         categoryLabel.textColor = .categoryColor
         likesCountLable.textColor = .activeElementTextColor
         updateTimeLabel.textColor = .secondarySubTextColor
-
-    }
-}
-
-// MARK: Actions
-extension ArticleTableViewCell {
-    @IBAction private func likeTouch(_ sender: Any) {
-        likeButton.isSelected = !likeButton.isSelected
-        likesCount = likeButton.isSelected ? likesCount + 1 : likesCount - 1
-        delegate?.likeField(isLiked: likeButton.isSelected, likesCount: likesCount, row: self.tag)
-    }
-    
-    @IBAction private func saveTouch(_ sender: Any) {
-        saveButton.isSelected = !saveButton.isSelected
-        delegate?.saveField(isSaved: saveButton.isSelected, row: self.tag)
     }
 }

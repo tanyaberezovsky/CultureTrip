@@ -9,13 +9,15 @@
 import Foundation
 
 class NetworkRequest {
+    // MARK: - Class Properties
     private let session: URLSession
     private var dataTask: URLSessionDataTask?
 
+    // MARK: - Init
     init(session: URLSession = URLSession.shared) {
         self.session = session
     }
-   
+   // MARK: - Public Methods
     func fetch<ApiResource: Resource>(resource: ApiResource, completion: @escaping (NetworkResponse<ApiResource>) -> Void) {
         cleanState()
         dataTask = session.dataTask(with: resource.url) { [weak self] data, response, error in
@@ -41,9 +43,8 @@ class NetworkRequest {
         }
         dataTask?.resume()
     }
-}
-// MARK: - Private Methods
-private extension NetworkRequest {
+
+    // MARK: - Private Methods
     func cleanState() {
          dataTask?.cancel()
     }

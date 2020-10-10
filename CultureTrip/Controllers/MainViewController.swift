@@ -9,11 +9,10 @@
 import UIKit
 
 class MainViewController: UIViewController {
-
+//MARK: - UIViewController events
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)

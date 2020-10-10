@@ -23,14 +23,14 @@
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B2h-re-riP">
-                        <rect key="frame" x="16" y="16" width="40" height="52"/>
+                        <rect key="frame" x="16" y="16" width="20" height="26"/>
                         <state key="normal" image="save"/>
                         <connections>
                             <action selector="saveTouch:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="R0U-cQ-Ee0"/>
                         </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GYY-Sg-BU4">
-                        <rect key="frame" x="271" y="16" width="49" height="49"/>
+                        <rect key="frame" x="295.5" y="16" width="24.5" height="24.5"/>
                         <state key="normal" image="like"/>
                         <connections>
                             <action selector="likeTouch:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Pgc-xu-v1Y"/>
@@ -82,7 +82,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hq3-5h-jDx">
-                        <rect key="frame" x="234.5" y="30" width="28" height="21"/>
+                        <rect key="frame" x="259" y="18" width="28" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.9410743117" green="0.94123536350000003" blue="0.94106405969999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -125,9 +125,9 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="articleImage" destination="xEr-dn-yzJ" id="guU-jZ-sXM"/>
+                <outlet property="articleImageView" destination="xEr-dn-yzJ" id="guU-jZ-sXM"/>
                 <outlet property="autorNameLabel" destination="vh9-N1-bCw" id="tej-UW-gqr"/>
-                <outlet property="avatarImage" destination="3uN-LQ-8yu" id="SC0-QP-P7q"/>
+                <outlet property="avatarImageView" destination="3uN-LQ-8yu" id="SC0-QP-P7q"/>
                 <outlet property="categoryLabel" destination="ABu-8B-WUL" id="sgq-GK-JZa"/>
                 <outlet property="likeButton" destination="GYY-Sg-BU4" id="Zec-Sa-rzb"/>
                 <outlet property="likesCountLable" destination="hq3-5h-jDx" id="6Ya-rL-oWL"/>

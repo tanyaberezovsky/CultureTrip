@@ -22,14 +22,9 @@ extension Date {
         }
     }
     
-    func getFormattedDate(dateString: String?, from: DateFormats = .long, to: DateFormats = .short) -> String {
-        let dateFormatterGet = DateFormatter()
-        dateFormatterGet.dateFormat = from.format
-
-        guard let dateString = dateString, let date = dateFormatterGet.date(from: dateString) else { return "" }
-          
+    func dateToString(toFormat: DateFormats = .short) -> String {
         let dateformatOutput = DateFormatter()
-        dateformatOutput.dateFormat = to.format
-        return dateformatOutput.string(from: date)
+        dateformatOutput.dateFormat = toFormat.format
+        return dateformatOutput.string(from: self)
     }
 }
