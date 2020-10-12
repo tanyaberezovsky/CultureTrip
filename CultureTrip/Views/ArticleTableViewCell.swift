@@ -46,7 +46,8 @@ class ArticleTableViewCell: UITableViewCell {
             self.likeButton.isSelected = viewModel.isLiked
             self.saveButton.isSelected = viewModel.isSaved
             self.likesCount = viewModel.likesCount
-            //self.avatarImageView.image = viewModel.articleImage ?? UIImage()
+            self.articleImage = viewModel.articleImage ?? UIImage()
+            self.avatarImage = viewModel.articleImage ?? UIImage()
         }
     }
     
@@ -56,6 +57,12 @@ class ArticleTableViewCell: UITableViewCell {
         }
     }
     
+    var avatarImage: UIImage = UIImage() {
+           didSet {
+               self.avatarImageView.image = avatarImage
+           }
+    }
+       
     //MARK: - UITableViewCell events
     override func awakeFromNib() {
         super.awakeFromNib()

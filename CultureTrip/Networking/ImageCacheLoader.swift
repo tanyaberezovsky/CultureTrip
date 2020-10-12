@@ -7,11 +7,11 @@
 //
 
 import UIKit
-//typealias ImageCacheLoaderCompletionHandler = ((UIImage) -> ())
 
 class ImageCacheLoader {
     private var session: URLSession
     private var cache: NSCache<NSString, UIImage>
+
     private var runningRequests: [String: URLSessionDownloadTask]
     
     init() {
@@ -30,9 +30,10 @@ class ImageCacheLoader {
     func obtainImageWithPath(imagePath: String, completionHandler: @escaping ((UIImage) -> ())) {
         
         if let image = self.cache.object(forKey: imagePath as NSString) {
-                completionHandler(image)
+            completionHandler(image)
+            return
         }
-        
+
         guard let url = URL(string: imagePath) else {
             completionHandler(UIImage())
             return
@@ -49,6 +50,7 @@ class ImageCacheLoader {
             if let data = try? Data(contentsOf: url) {
               guard let imageToCache = UIImage(data: data) else { return  completionHandler(UIImage()) }
               self?.cache.setObject(imageToCache, forKey: imagePath as NSString)
+
               DispatchQueue.main.async {
                   completionHandler(imageToCache)
               }

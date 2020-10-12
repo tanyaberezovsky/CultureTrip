@@ -15,8 +15,8 @@ protocol ArticleViewModelProtocol {
     var category: String { get set }
     var authorName: String { get set }
     var updateTime: String { get set }
-    var articleImageUrl: String { get set }
-    var avatarImageUrl: String { get set }
+    var articleImage: UIImage? { get set }
+    var avatarImage: UIImage? { get set }
 }
 struct ArticleViewModel: ArticleViewModelProtocol {
     var title: String
@@ -26,18 +26,22 @@ struct ArticleViewModel: ArticleViewModelProtocol {
     var category: String
     var authorName: String
     var updateTime: String
-    var articleImageUrl: String
-    var avatarImageUrl: String
+    var articleImage: UIImage?
+    var avatarImage: UIImage?
  
-    init(fromArticle article: Article) {
-        title = article.title ?? ""
-        isLiked = article.isLiked ?? false
-        isSaved = article.isSaved ?? false
-        likesCount = article.likesCount ?? 0
-        category = article.category ?? ""
-        authorName = article.author?.authorName ?? ""
-        updateTime = article.metaData?.updateTime?.dateToString() ?? ""
-        articleImageUrl = article.imageURL ?? ""
-        avatarImageUrl = article.author?.authorAvatar?.imageURL ?? ""
+    init(fromArticle article: Article, articleImage: UIImage?, avatarImage: UIImage?) {
+        title = article.title
+        isLiked = article.isLiked
+        isSaved = article.isSaved
+        likesCount = article.likesCount
+        category = article.category
+        authorName = article.author.authorName
+        updateTime = article.metaData.updateTime.dateToString()
+        if let articleImage = articleImage {
+            self.articleImage = articleImage
+        }        
+        if let avatarImage = avatarImage {
+            self.avatarImage = avatarImage
+        }
     }
 }

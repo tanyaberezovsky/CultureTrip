@@ -15,10 +15,13 @@ class ArticlesViewController: UIViewController {
     //MARK: - Class Properties
     private let resourseLoader = NetworkRequest() 
     private var articles = [Article]()
-//    private var imageCache = NSCache<AnyObject, AnyObject>()
-//    private var avatarCache = NSCache<AnyObject, AnyObject>()
     private let cellSpacingHeight: CGFloat = 16
-    private let imageLoader = ImageCacheLoader()
+    private let imageCacheLoader = ImageCacheLoader()    
+    enum ImageType {
+        case article
+        case avatar
+    }
+
     //MARK: - UIViewController events
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,14 +51,6 @@ class ArticlesViewController: UIViewController {
     }
 
     // MARK: Networking
-    private func loadImage(_ imageURL: String?, _ imageView: UIImageView,_ imageCache: NSCache<AnyObject, AnyObject>) {
-        guard let imageURL = imageURL else { return }
-        if let image = imageCache.object(forKey: imageURL as AnyObject) as? UIImage {
-            imageView.image = image
-        } else {
-            downloadImage(imageURL, RequestHandler(imageView, imageCache: imageCache))
-        }
-    }
 
     private func getArticles() {
         let articlesResource = ArticlesResource()
@@ -84,40 +79,50 @@ extension ArticlesViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
+
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let article = articles[indexPath.section]
-        if let articleImagePath = article.imageURL {
-            imageLoader.cancelLoad(articleImagePath)
-        }
-        if let articleImagePath = article.imageURL {
-            imageLoader.cancelLoad(articleImagePath)
-        }
+        imageCacheLoader.cancelLoad(article.imageURL)
+        imageCacheLoader.cancelLoad(article.author.authorAvatar.imageURL)
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: ArticleTableViewCell = tableView.dequeueReusableCell(withIdentifier: ArticleTableViewCell.identifier ) as! ArticleTableViewCell
+        
         let article = articles[indexPath.section]
         cell.delegate = self
         cell.tag = indexPath.section
-        cell.viewModel = ArticleViewModel(fromArticle: articles[indexPath.section])
-//        loadImage(article.imageURL, cell.articleImage, imageCache)
-//        loadImage(article.author?.authorAvatar?.imageURL, cell.avatarImage, avatarCache)
-
         
-        if let articleImagePath = article.imageURL {
-            if let articleImage = imageLoader.getImageCache(imagePath: articleImagePath) {
-                cell.articleImage = articleImage
-            } else {
-                let uuid = imageLoader.obtainImageWithPath(imagePath: articleImagePath) { (image) in
-                    // Before assigning the image, check whether the current cell is visible
-                    if let updateCell = tableView.cellForRow(at: indexPath) as? ArticleTableViewCell {
-                        updateCell.articleImage = image
-                    }
-                }
-            }
-        }
-
+        let articleImage: UIImage? = obtainImage(article.imageURL, .article, tableView, indexPath)
+        let avatarImage: UIImage? = obtainImage(article.author.authorAvatar.imageURL, .avatar, tableView, indexPath)
+                
+        cell.viewModel = ArticleViewModel(fromArticle: article, articleImage: articleImage, avatarImage: avatarImage)
+           
         return cell
     }
+    
+    fileprivate func obtainImage(_ articleImageUrl: String, _ imageType: ImageType, _ tableView: UITableView, _ indexPath: IndexPath) -> UIImage? {
+        if let image = imageCacheLoader.getImageCache(imagePath: articleImageUrl) {
+            return image
+        } else {
+            downloadImage(articleImageUrl, imageType, tableView, indexPath)
+        }
+        return nil
+    }
+
+    fileprivate func downloadImage(_ articleImageUrl: String, _ imageType: ImageType, _ tableView: UITableView, _ indexPath: IndexPath) {
+         imageCacheLoader.obtainImageWithPath(imagePath: articleImageUrl) { (image) in
+             // Before assigning the image, check whether the current cell is visible
+             if let updateCell = tableView.cellForRow(at: indexPath) as? ArticleTableViewCell {
+                 switch imageType {
+                 case .article:
+                     updateCell.articleImage = image
+                 case .avatar:
+                     updateCell.avatarImage = image
+                 }
+             }
+         }
+     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)

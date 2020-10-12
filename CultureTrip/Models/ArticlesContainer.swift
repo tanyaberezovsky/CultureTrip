@@ -8,7 +8,6 @@
 
 import Foundation
 
-// MARK: - ArticlesContainer
 struct ArticlesContainer: Codable {
     let articles: [Article]?
 
@@ -18,13 +17,15 @@ struct ArticlesContainer: Codable {
 }
 
 struct Article: Codable {
-    let metaData: MetaData?
-    let id, title: String?
-    let imageURL: String?
-    var isSaved, isLiked: Bool?
-    var likesCount: Int?
-    let category: String?
-    let author: Author?
+    
+    let id: String
+    let metaData: MetaData
+    let title: String
+    let imageURL: String
+    var isSaved, isLiked: Bool
+    var likesCount: Int
+    let category: String
+    let author: Author
 
     enum CodingKeys: String, CodingKey {
         case metaData, id, title
@@ -34,16 +35,17 @@ struct Article: Codable {
 }
 
 struct MetaData: Codable {
-    let creationTime, updateTime: Date?
+    let creationTime, updateTime: Date
 }
 
 struct Author: Codable {
-    let id, authorName: String?
-    let authorAvatar: AuthorAvatar?
+    let id: String
+    let authorName: String
+    let authorAvatar: AuthorAvatar
 }
 
 struct AuthorAvatar: Codable {
-    let imageURL: String?
+    let imageURL: String
 
     enum CodingKeys: String, CodingKey {
         case imageURL = "imageUrl"
