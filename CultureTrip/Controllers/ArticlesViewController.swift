@@ -33,7 +33,7 @@ class ArticlesViewController: UIViewController {
         getArticles()
     }
 
-    //MARK: Private functions
+    //MARK:-  Private functions
     private func initTableView() {
         let nib = UINib.init(nibName: ArticleTableViewCell.identifier , bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: ArticleTableViewCell.identifier)
@@ -50,22 +50,21 @@ class ArticlesViewController: UIViewController {
         self.view.backgroundColor = .lightGray
     }
 
-    // MARK: Networking
-
+    // MARK: - Networking
     private func getArticles() {
         let articlesResource = ArticlesResource()
         _ = resourseLoader.fetch(resource: articlesResource)  { [weak self] result in
-                   DispatchQueue.main.async {
-                        switch result {
-                        case .success(let successResult):
-                            guard let articles = successResult.articles else { return }
-                            self?.articles = articles
-                            self?.tableView.reloadData()
-                        case .failure(let networkServerError):
-                           print("networkServerError: \(networkServerError)")
-                       }
-                   }
+           DispatchQueue.main.async {
+                switch result {
+                case .success(let successResult):
+                    guard let articles = successResult.articles else { return }
+                    self?.articles = articles
+                    self?.tableView.reloadData()
+                case .failure(let networkServerError):
+                   print("networkServerError: \(networkServerError)")
                }
+           }
+        }
     }
 }
 
@@ -111,19 +110,23 @@ extension ArticlesViewController: UITableViewDataSource, UITableViewDelegate{
     }
 
     fileprivate func downloadImage(_ articleImageUrl: String, _ imageType: ImageType, _ tableView: UITableView, _ indexPath: IndexPath) {
-         imageCacheLoader.obtainImageWithPath(imagePath: articleImageUrl) { (image) in
+         imageCacheLoader.obtainImageWithPath(imagePath: articleImageUrl) { [weak self] (image) in
              // Before assigning the image, check whether the current cell is visible
              if let updateCell = tableView.cellForRow(at: indexPath) as? ArticleTableViewCell {
-                 switch imageType {
-                 case .article:
-                     updateCell.articleImage = image
-                 case .avatar:
-                     updateCell.avatarImage = image
-                 }
+                self?.setImage(updateCell, image, imageType)
              }
          }
-     }
+    }
     
+    fileprivate func setImage(_ updateCell: ArticleTableViewCell, _ image: UIImage, _ imageType: ImageType) {
+          switch imageType {
+          case .article:
+              updateCell.articleImage = image
+          case .avatar:
+              updateCell.avatarImage = image
+          }
+      }
+      
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
