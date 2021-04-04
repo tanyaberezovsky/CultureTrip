@@ -93,7 +93,7 @@
                             <fragment content="An Interview with">
                                 <attributes>
                                     <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                    <font key="NSFont" metaFont="system" size="18"/>
+                                    <font key="NSFont" metaFont="label" size="18"/>
                                     <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.5" tighteningFactorForTruncation="0.0"/>
                                 </attributes>
                             </fragment>
